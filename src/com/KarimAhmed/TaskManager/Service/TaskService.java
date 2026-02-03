@@ -105,6 +105,9 @@ public class TaskService {
             System.out.println("Invalid ID");
         }
 
+    }
 
+    public boolean taskExists(int id){
+        return searchByID(id)!=-1;
     }
 }
