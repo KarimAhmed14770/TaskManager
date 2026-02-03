@@ -1,0 +1,26 @@
+1. Functional Requirements
+
+a)Create Task: User enters a description. The system automatically assigns a unique ID and
+sets the status to PENDING.
+
+b)View All Tasks: Display a formatted table showing ID, Description,
+and Status (Pending/Completed).
+
+c)Mark Task as Complete: User enters the Task ID to toggle its status.
+
+d)Delete Task: User enters the Task ID to remove it from the list.
+
+e)Data Persistence: When the app starts, it reads from tasks.txt.
+When the user adds/deletes, it saves to tasks.txt. This is the most important "Pro" feature.
+
+2. Technical Requirements (The "Pro" Checklist)
+
+Object-Oriented Design
+Generics: Use an ArrayList<Task>
+
+Encapsulation: All fields in your Task class should be private with public getters/setters.
+
+Error Handling: Use try-catch blocks to handle "File Not Found" or when a user types a
+letter instead of a Task ID number.
+
+Enum for Status: Instead of using a String for "Pending," use a Java Enum.
