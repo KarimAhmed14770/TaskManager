@@ -1,60 +1,66 @@
-Java CLI Task Manager (Layered Architecture)
-A professional-grade, terminal-based Task Management System built with Java 17. This project demonstrates Clean Architecture principles, Data Persistence, and a strong Separation of Concerns.
+**Task Manager API (CLI-Based):**
 
-📖 Overview
-The goal of this project was to build a robust CRUD application that survives application restarts. By implementing a Model-Service-Repository pattern, the application separates user interaction from business logic and data storage.
+A robust Task Management System implementing Clean Architecture and Data Persistence. This project demonstrates the transition from basic scripting to professional-grade software design in Java.
 
-🛠️ Key Technical Features
-1. Persistent Data Layer
-Unlike most basic CLI apps, this project includes a dedicated Persistence Layer.
+🏗 **System Architecture:**
 
-Repository Pattern: The TaskRepository handles raw File I/O (reading/writing to tasks.txt).
+The application follows a Decoupled Layered Architecture, ensuring that business logic is independent of the user interface and the data storage mechanism.
 
-Data Serialization: Implements custom parsing logic to map pipe-separated text (|) back into Java Objects.
+Layer	Responsibility	Key Component
+Presentation:	Handles User Input/Output and Menu Navigation	Main.java
+Service: Logic & Validation	TaskService.java
+Persistence:	Manages Serialization & File I/O	TaskRepository.java
+Domain: Defines the Core Data Structures	Task.java, TaskStatus.java
 
-2. Business Logic & Validation
-The TaskService acts as the engine room of the application:
+🛠 **Key Features:**
 
-Unique ID Generation: Automatically calculates the next available ID based on existing data, ensuring integrity even if the file is modified manually.
+Persistent Storage: Data is serialized to a pipe-separated (|) flat-file system, ensuring persistence across application restarts.
 
-Early Validation: The system validates task existence before prompting users for additional data, providing a smooth User Experience (UX).
+Atomic ID Generation: A custom algorithm calculates the next unique identifier on startup to maintain data integrity.
 
-Dependency Injection: The Service receives its Repository via the constructor, making the code decoupled and testable.
+Early Validation: Implements checks to verify resource existence before prompting for user input, optimizing UX flow.
 
-3. Modern Java Implementation
-Switch Expressions: Utilizes Java 17 switch syntax for cleaner, more readable menu logic.
+Safety Features: Graceful handling of invalid inputs and scanner buffer management.
+                
+🚀 **Getting Started:**
 
-Robust Input Handling: Manages the Scanner buffer correctly to prevent common CLI input skipping bugs.
-
-🏗️ Architecture Design
-The project follows the Single Responsibility Principle:
-
-Model: Defines the data structure (Task) and states (TaskStatus).
-
-Repository: Manages the physical storage (tasks.txt).
-
-Service: Handles logic (Adding, Updating, Deleting).
-
-Main: The Controller/View that interacts with the user.
-
-🚀 Getting Started
 Prerequisites
-Java 17 or higher
 
-Installation & Execution
+JDK 17 or higher.
+
+A terminal/command prompt.
+
+Installation
 Clone the repository:
 
 Bash
-git clone https://github.com/YourUsername/TaskManager.git
-Compile the project:
+
+git clone https://github.com/KarimAhmed14770/TaskManager.git
+Navigate to the source directory:
 
 Bash
+
+cd TaskManager/src
+
+Running the Application
+Compile and run using the following commands:
+
+Bash
+
 javac com/KarimAhmed/TaskManager/Main.java
-Run the application:
-
-Bash
 java com.KarimAhmed.TaskManager.Main
-🧠 Design Decisions
-UI Independence: I intentionally excluded Scanner from the Service layer. This ensures that if I decide to add a Web or GUI interface later, I can reuse 100% of the Service and Repository logic.
 
-Atomic Commits: The project history follows the Conventional Commits standard (feat:, fix:, refactor:) to reflect a professional development workflow.
+🧠 Design Decisions & Best Practices
+
+**Dependency Injection**: The TaskService receives its repository through the constructor. This allows for easier unit testing and future-proofs the app for database migration (e.g., SQL).
+
+**Separation of Concerns (SoC)**: I strictly kept UI logic (Scanner, System.out) out of the Service and Repository layers. This allows the core logic to be reused for a Web API or Desktop GUI without modification.
+
+**Conventional Commits**: I utilized the Conventional Commits standard (feat:, fix:) to maintain a clean and readable version history.
+
+👤 Author
+Karim Ahmed
+
+LinkedIn:https://www.linkedin.com/in/karim-ahmed-9130271b1/
+
+GitHub:https://github.com/KarimAhmed14770
