@@ -37,22 +37,32 @@ public class Main {
                     System.out.print("Enter Task Id: ");
                     int id=sc.nextInt();
                     sc.nextLine();//clear buffer
-                    System.out.print("Enter task Status: 1(Pending), 2(In Progress), 3(Completed)");
-                    int status=sc.nextInt();
-                    sc.nextLine();
-                    TaskStatus userStatus=switch (status){
-                        case 1->TaskStatus.PENDING;
-                        case 2->TaskStatus.IN_PROGRESS;
-                        case 3->TaskStatus.COMPLETED;
-                        default -> throw new IllegalArgumentException("Invalid status number");
-                    };
-                    ts.updateTaskStatus(id,userStatus);
+                    if(ts.taskExists(id)) {
+                        System.out.print("Enter task Status: 1(Pending), 2(In Progress), 3(Completed)");
+                        int status = sc.nextInt();
+                        sc.nextLine();
+                        TaskStatus userStatus = switch (status) {
+                            case 1 -> TaskStatus.PENDING;
+                            case 2 -> TaskStatus.IN_PROGRESS;
+                            case 3 -> TaskStatus.COMPLETED;
+                            default -> throw new IllegalArgumentException("Invalid input try again");
+                        };
+                        ts.updateTaskStatus(id, userStatus);
+                    }
+                    else{
+                        System.out.println("Task doesn't exist");
+                    }
                 }
                 case 4->{
                     System.out.print("Enter Task Id: ");
                     int id=sc.nextInt();
                     sc.nextLine();//clear buffer
-                    ts.deleteTask(id);
+                    if(ts.taskExists(id)) {
+                        ts.deleteTask(id);
+                    }
+                    else{
+                        System.out.println("Task doesn't exist");
+                    }
                 }
                 case 5->{
                     running=false;
